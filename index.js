@@ -169,3 +169,10 @@ const getUrlParams = sourceStr => {
   });
   return urlParams;
 };
+
+/**
+ * 延迟指定毫秒的时间
+ * @param {Number} mill 毫秒，默认2000
+ * @returns {Promise}
+ */
+const delay = (mill = 2000) => new Promise(r => setTimeout(r, mill));
