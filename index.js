@@ -176,3 +176,20 @@ const getUrlParams = sourceStr => {
  * @returns {Promise}
  */
 const delay = (mill = 2000) => new Promise(r => setTimeout(r, mill));
+
+/**
+ * compose函数，按传递的函数倒叙执行
+ * @param  {...Function} funcs 
+ * @returns {any}
+ */
+const compose = (...funcs) => {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+};
