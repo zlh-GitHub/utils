@@ -193,3 +193,69 @@ const compose = (...funcs) => {
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
 };
+
+/**
+ * 1天的毫秒数
+ */
+const ONE_DAY_OF_MILL = 86400000;
+
+/**
+ * 返回当天的结束时间戳，即当天23:59:59的时间戳
+ * @param {Date} target 时间对象
+ * @returns {Number}
+ */
+const getTargetDayEndTimeStamp = (target = new Date()) => target.setHours(0, 0, 0, 0) + ONE_DAY_OF_MILL - 1;
+
+/**
+ * 返回当天的开始时间戳，即当天00:00:00的时间戳
+ * @param {Date} target 时间对象
+ * @returns {Number}
+ */
+const getTargetDayStartTimeStamp = (target = new Date()) => target.setHours(0, 0, 0, 0);
+
+/**
+ * 返回指定日期的时间戳范围
+ * @param {Date} target 时间对象
+ * @returns {{ start: Number, end: Number }}
+ */
+const getTargetDayTimeStampRange = (target = new Date()) => ({
+  start: getTargetDayStartTimeStamp(target),
+  end: getTargetDayEndTimeStamp(target),
+});
+
+/**
+ * 返回指定时间所在星期的开始时间戳
+ * 星期一的0:0:0.0 - 星期天的23:59:59.999
+ * @param {Date} target 时间对象
+ * @returns {Number}
+ */
+const getTargetWeekStartTimeStamp = (target = new Date()) => {
+  const targetYear = target.getFullYear();
+  const targetMonth = target.getMonth();
+  const targetDate = target.getDate();
+  const targetDay = target.getDay() || 7;
+  return new Date(targetYear, targetMonth, targetDate - targetDay + 1).setHours(0, 0, 0, 0);
+};
+
+/**
+ * 返回指定时间所在星期的结束时间戳
+ * @param {Date} target 时间对象
+ * @returns {Date}
+ */
+const getTargetWeekEndTimeStamp = (target = new Date()) => {
+  const targetYear = target.getFullYear();
+  const targetMonth = target.getMonth();
+  const targetDate = target.getDate();
+  const targetDay = target.getDay() || 7;
+  return new Date(targetYear, targetMonth, targetDate + (7 - targetDay)).setHours(23, 59, 59, 999);
+};
+
+/**
+ * 返回指定日期所在星期的时间戳范围
+ * @param {Date} target 时间对象
+ * @returns {{ start: Number, end: Number }}
+ */
+const getTargetWeekTimeStampRange = (target = new Date()) => ({
+  start: getTargetWeekStartTimeStamp(target),
+  end: getTargetWeekEndTimeStamp(target),
+});
