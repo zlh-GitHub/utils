@@ -94,3 +94,34 @@ const throttle = (func, wait, options = {}) => {
 
   return throttled;
 };
+
+/**
+ * 格式化时间
+ * @param {String | Date ｜ Number} time 时间戳/时间字符串/Date对象
+ * @param {String} fmt 格式
+ * @returns {String}
+ * @example
+ *    年-月-日 时:分:秒
+ *    yyyy-MM-dd hh:mm:ss:SS => 2016-10-29 10:22:22.176
+ *    yyyy年MM月dd日 hh:mm:ss:SS => 2016年10月29日 10:22:22.176
+ */
+const formatDate = (time, fmt) => {
+  const date = new Date(time);
+  const obj = {
+    'y+': date.getFullYear(),
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'h+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds(),
+    'q+': Math.floor((date.getMonth() + 3) / 3),
+    'S+': date.getMilliseconds(),
+  };
+
+  for (const k in obj) {
+    const re = new RegExp('(' + k + ')');
+    fmt = fmt.replace(re, String(obj[k]).padStart(2, 0));
+  }
+
+  return fmt;
+};
