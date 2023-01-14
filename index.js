@@ -259,3 +259,11 @@ const getTargetWeekTimeStampRange = (target = new Date()) => ({
   start: getTargetWeekStartTimeStamp(target),
   end: getTargetWeekEndTimeStamp(target),
 });
+
+/**
+ * 如果num不足digits位，则在前面补0
+ * @param {Number} num 整数
+ * @param {Number} digits 几位数
+ * @returns String
+ */
+const padStartZero = (num, digits = 2) => num <= '9'.repeat(digits - 1) ? String(num).padStart(digits, 0) : num;
