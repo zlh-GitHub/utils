@@ -267,3 +267,18 @@ const getTargetWeekTimeStampRange = (target = new Date()) => ({
  * @returns {String}
  */
 const padStartZero = (num, digits = 2) => num <= '9'.repeat(digits - 1) ? String(num).padStart(digits, 0) : num;
+
+/**
+ * 判断对象是否为空
+ * @param {Object} obj 
+ * @returns {Boolean}
+ */
+const isEmptyObject = obj => {
+  let key;
+
+  for (key in obj) {
+    return false;
+  }
+
+  return true;
+};
