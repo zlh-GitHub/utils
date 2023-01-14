@@ -1,7 +1,7 @@
 /**
  * 返回值类型
  * @param {any} obj
- * @returns
+ * @returns {String}
  */
 const type = (obj) =>
   Reflect.apply(Object.prototype.toString, obj, [])
@@ -13,7 +13,7 @@ const type = (obj) =>
  * @param {Function} func
  * @param {Number} wait
  * @param {Boolean} immediate
- * @returns
+ * @returns {Function}
  */
 const debounce = (func, wait, immediate) => {
   let timerId, result;
@@ -54,7 +54,7 @@ const debounce = (func, wait, immediate) => {
  * @param {Function} func
  * @param {Number} wait
  * @param {{ leading: Boolean, trailing: Boolean }} options leading: 鼠标移入是否能立刻执行  trailing: 停止触发的时是否还能再执行一次
- * @returns
+ * @returns {Function}
  */
 const throttle = (func, wait, options = {}) => {
   const { leading, trailing } = options;
@@ -264,6 +264,6 @@ const getTargetWeekTimeStampRange = (target = new Date()) => ({
  * 如果num不足digits位，则在前面补0
  * @param {Number} num 整数
  * @param {Number} digits 几位数
- * @returns String
+ * @returns {String}
  */
 const padStartZero = (num, digits = 2) => num <= '9'.repeat(digits - 1) ? String(num).padStart(digits, 0) : num;
